@@ -15,10 +15,28 @@ function nextQuestion(index) {
     if (index >= questions.length) return; // Stop if we run out of questions
 
     currentQuestion = index;
-    document.getElementById("question").innerText = questions[index].text;
+    let questionContainer = document.getElementById("question-container");
+    let questionElement = document.getElementById("question");
     let optionsContainer = document.getElementById("options");
-    optionsContainer.innerHTML = ""; // Clear previous buttons
 
+    // Clear previous content
+    questionElement.innerHTML = "";
+    optionsContainer.innerHTML = "";
+
+    // Check if the current question is the "Will you be my valentine?" question
+    if (questions[index].text === "Will you Be My Valentine? 💖") {
+        let catImage = new Image();
+        catImage.src = 'cat.gif';
+        catImage.alt = 'Cat';
+        catImage.style.display = 'block';
+        catImage.style.margin = '0 auto 20px';
+        questionElement.appendChild(catImage);
+    }
+
+    // Set the question text
+    questionElement.innerHTML += questions[index].text;
+
+    // Create buttons for the answers
     questions[index].answers.forEach(answer => {
         let button = document.createElement("button");
         button.innerText = answer;
