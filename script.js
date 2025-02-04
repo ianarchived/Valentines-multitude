@@ -1,3 +1,5 @@
+// script.js
+
 const questions = [
     { 
         text: "Hiii Honeyy!!! 💕", 
