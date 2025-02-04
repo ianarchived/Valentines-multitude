@@ -1,71 +1,50 @@
-// script.js
-
+// Questions and answers
 const questions = [
-    { 
-        text: "Hiii Honeyy!!! 💕", 
-        answers: ["Hiii !!!!"] 
-    },
-    { 
-        text: "I’m glad you took the time off your day to open this website :DDD", 
-        answers: ["Of course !!!"] 
-    },
-    { 
-        text: "As you know, there’s a specific day coming up!", 
-        answers: ["Mhmm !!!"] 
-    },
-    { 
-        text: "And you, being the one that I love most, I just want to ask you something very important!", 
-        answers: ["What is it :ooo"] 
-    },
-    { 
-        text: "Will you Be My Valentine? 💖", 
-        answers: ["Yes 😍", "No 😔"], 
-        special: true // This question has a Yes/No effect
-    },
-    { 
-        text: "YIPPEEEEE!!! 🎉 I made a special gift for you!", 
-        answers: ["🎁 Open Your Gift! 🎁"], 
-        link: "YOUR_LINK_HERE" 
-    }
+    { text: "Hiii Honeyy!!! 💕", answers: ["Hiii !!!!"] },
+    { text: "I’m glad you took the time off your day to open this website :DDD", answers: ["Of course !!!"] },
+    { text: "As you know, there’s a specific day coming up!", answers: ["Mhmm !!!"] },
+    { text: "And you, being the one that I love most, I just want to ask you something very important!", answers: ["What is it :ooo"] },
+    { text: "Will you Be My Valentine? 💖", answers: ["Yes 😍", "No 😔"], special: true },
+    { text: "YIPPEEEEE!!! 🎉 I made a special gift for you!", answers: ["🎁 Open Your Gift! 🎁"], link: "YOUR_LINK_HERE" }
 ];
 
 let currentQuestion = 0;
 let noButtonPressCount = 0;
 
 function nextQuestion(index) {
-    if (index >= questions.length) return;
+    if (index >= questions.length) return; // Stop if we run out of questions
 
     currentQuestion = index;
-    const questionContainer = document.getElementById("question-container");
-    const questionText = document.getElementById("question-text");
-    const answerButtons = document.getElementById("answer-buttons");
+    document.getElementById("question").innerText = questions[index].text;
+    let optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = ""; // Clear previous buttons
 
-    // Update the question
-    questionText.innerText = questions[index].text;
-
-    // Clear old buttons
-    answerButtons.innerHTML = "";
-
-    // Add new buttons
-    questions[index].answers.forEach((answer) => {
+    questions[index].answers.forEach(answer => {
         let button = document.createElement("button");
-        button.classList.add("btn");
         button.innerText = answer;
+
+        // Special handling for the Valentine question
         if (questions[index].special) {
             button.onclick = answer === "Yes 😍" ? () => selectOption("yes") : () => selectOption("no");
-        } else if (questions[index].link) {
+        } 
+        // Redirect to a special gift if it's the final question
+        else if (questions[index].link) {
             button.onclick = () => window.location.href = questions[index].link;
-        } else {
+        } 
+        // Otherwise, go to the next question
+        else {
             button.onclick = () => nextQuestion(index + 1);
         }
-        answerButtons.appendChild(button);
+
+        optionsContainer.appendChild(button);
     });
 }
 
+// Handles "Will You Be My Valentine?" responses
 function selectOption(option) {
     let questionDiv = document.getElementById('question-container');
-    let yesButton = document.querySelector(".btn:first-child");
-    let noButton = document.querySelector(".btn:last-child");
+    let yesButton = document.querySelector("#options button:first-child");
+    let noButton = document.querySelector("#options button:last-child");
 
     if (option === 'yes') {
         flashRainbowColors(() => {
@@ -76,10 +55,12 @@ function selectOption(option) {
     } else if (option === 'no') {
         noButtonPressCount++;
         
+        // Increase font size of the "Yes" button
         let currentFontSize = window.getComputedStyle(yesButton).getPropertyValue('font-size');
         let newSize = parseFloat(currentFontSize) * 1.2;
         yesButton.style.fontSize = newSize + 'px';
 
+        // Change "No" button text progressively
         let noTexts = [
             'You sure?', 'Really sure?', 'Absolutely sure?', 'Legit ba?', 'Bakit?', 'Ano ba?', 
             'Ano trip mo?', 'Mag yes ka na kasi', 'Makulit ka ah', 'Pag nag yes ka may regalo ka sakin', 
@@ -92,6 +73,7 @@ function selectOption(option) {
     }
 }
 
+// Flash rainbow effect when "Yes" is selected
 function flashRainbowColors(callback) {
     let colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
     let i = 0;
@@ -102,11 +84,12 @@ function flashRainbowColors(callback) {
     
     setTimeout(() => {
         clearInterval(interval);
-        document.body.style.backgroundColor = '#ffe6f2';
+        document.body.style.backgroundColor = '#FADADD';
         callback();
     }, 2000);
 }
 
+// Display a cute cat-heart gif when "Yes" is selected
 function displayCatHeart() {
     document.getElementById('image-container').innerHTML = '';
     let imageContainer = document.getElementById('image-container');
@@ -119,6 +102,7 @@ function displayCatHeart() {
     };
 }
 
+// Move the "No" button randomly to make it hard to press
 function moveButtonToRandomPosition(button) {
     let maxX = window.innerWidth - button.clientWidth - 50;
     let maxY = window.innerHeight - button.clientHeight - 50;
@@ -128,3 +112,6 @@ function moveButtonToRandomPosition(button) {
     button.style.left = randomX + 'px';
     button.style.top = randomY + 'px';
 }
+
+// Initialize the first question
+nextQuestion(0);
