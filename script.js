@@ -98,8 +98,24 @@ function displayCatHeart() {
     catHeartImage.alt = 'Cat Heart';
     catHeartImage.onload = () => {
         imageContainer.appendChild(catHeartImage);
-        document.getElementById('question-container').style.display = 'none';
+        document.getElementById('question-container').style.display = 'block';
+        displayFinalQuestion();
     };
+}
+
+// Display the final question with the gift link
+function displayFinalQuestion() {
+    let finalQuestion = questions[5];
+    document.getElementById("question").innerText = finalQuestion.text;
+    let optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = ""; // Clear previous buttons
+
+    finalQuestion.answers.forEach(answer => {
+        let button = document.createElement("button");
+        button.innerText = answer;
+        button.onclick = () => window.location.href = finalQuestion.link;
+        optionsContainer.appendChild(button);
+    });
 }
 
 // Move the "No" button randomly to make it hard to press
