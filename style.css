@@ -1,43 +1,40 @@
 /* style.css */
 
-body { 
-    font-family: Arial, sans-serif; 
-    text-align: center; 
-    padding: 40px; 
-    background-color: #ffe6f2; 
-    transition: background-color 0.3s; 
+body {
+    font-family: Arial, sans-serif; /* Fallback font family */
+    text-align: center; /* Center-align text */
+    margin: 0; /* Remove default margin */
+    background-color: #FADADD; /* Set background color to light pink */
 }
 
-#question-container {
-    max-width: 600px;
-    margin: auto;
-    font-size: 22px;
-    padding: 20px;
+#container {
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center-align items horizontally */
+    justify-content: center; /* Center-align items vertically */
+    height: 100vh; /* Make the container full viewport height */
 }
 
-.btn { 
-    display: block;
-    padding: 12px 20px; 
-    margin: 10px auto; 
-    font-size: 18px; 
-    border: none; 
-    cursor: pointer; 
-    border-radius: 8px; 
-    background-color: #ff66b2;
-    color: white;
-    transition: all 0.3s ease; 
+#image-container {
+    /* This container will hold the images */
 }
 
-.btn:hover { 
-    background-color: #ff99cc; 
+#question {
+    font-family: 'Sacramento', cursive; /* Apply Sacramento font to the question */
+    font-size: 52px; /* Set font size for the question */
 }
 
-#image-container img { 
-    width: 150px; 
-    height: auto; 
-    margin-top: 20px; 
+#options {
+    margin-top: 20px; /* Add space above the options */
 }
 
-#no-button { 
-    position: relative; 
+button {
+    padding: 10px 20px; /* Set padding for buttons */
+    margin: 0 10px; /* Set margin around buttons */
+    font-size: 26px; /* Set font size for buttons */
+    font-family: 'Sacramento', cursive; /* Apply Sacramento font to the options */
+    background-color: #FB607F; /* Set button background color */
+    color: white; /* Set text color to white */
+    border: none; /* Remove button border */
+    cursor: pointer; /* Set cursor to pointer on hover */
 }
