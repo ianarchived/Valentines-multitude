@@ -19,7 +19,7 @@ body {
     /* This container will hold the images */
 }
 
-#question {
+#questions {
     font-family: 'Sacramento', cursive; /* Apply Sacramento font to the question */
     font-size: 52px; /* Set font size for the question */
 }
