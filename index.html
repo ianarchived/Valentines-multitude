@@ -3,22 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap">
-    <link rel="stylesheet" href="style.css"> <!-- Link to external stylesheet -->
+    <title>Will You Be My Valentine? 💖</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 40px; background-color: #ffe6f2; }
+        .question { display: none; font-size: 20px; margin-bottom: 20px; }
+        .question:first-child { display: block; }
+        .btn { padding: 10px 20px; margin: 5px; font-size: 16px; border: none; cursor: pointer; border-radius: 8px; }
+        .btn:hover { background-color: #ff99cc; }
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
-    <div id="container">
-        <div id="image-container"></div> <!-- Container for displaying images -->
-        <div id="text-container">
-            <div id="question">Will you be my valentine?</div> <!-- Question -->
-            <div id="options">
-                <button id="yes-button" onclick="selectOption('yes')">Yes</button> <!-- Yes button -->
-                <button id="no-button" onclick="selectOption('no')">No</button> <!-- No button -->
-            </div>
+
+    <div id="quiz">
+        <div class="question">
+            <p>Hiii Honeyy!!! 💕</p>
+            <button class="btn" onclick="nextQuestion()">Hiii !!!!</button>
+        </div>
+        
+        <div class="question">
+            <p>I’m glad you took the time off your day to open this website :DDD</p>
+            <button class="btn" onclick="nextQuestion()">Of course !!!</button>
+        </div>
+
+        <div class="question">
+            <p>As you know, there’s a specific day coming up!</p>
+            <button class="btn" onclick="nextQuestion()">Mhmm !!!</button>
+        </div>
+
+        <div class="question">
+            <p>And you, being the one that I love most, I just want to ask you something very important!</p>
+            <button class="btn" onclick="nextQuestion()">What is it :ooo</button>
+        </div>
+
+        <div class="question">
+            <p>Will you Be My Valentine? 💖</p>
+            <button class="btn" onclick="nextQuestion()">Yes (na makulit) 😆</button>
+            <button class="btn" onclick="nextQuestion()">No (pero joke lang) 😂</button>
+        </div>
+
+        <div class="question">
+            <p>YIPPEEEEE!!! 🎉 For saying yes and being the coolest, most loving, most adorable person ever, I made a gift for you that you can always look back on no matter what!</p>
+            <a href="YOUR_LINK_HERE" class="btn" style="background-color: #ff66b2; color: white;">🎁 Open Your Gift! 🎁</a>
         </div>
     </div>
 
-    <script src="script.js"></script> <!-- Link to external JavaScript file -->
+    <script>
+        let currentQuestion = 0;
+        function nextQuestion() {
+            let questions = document.querySelectorAll('.question');
+            if (currentQuestion < questions.length - 1) {
+                questions[currentQuestion].style.display = "none";
+                currentQuestion++;
+                questions[currentQuestion].style.display = "block";
+            }
+        }
+    </script>
+
 </body>
 </html>
