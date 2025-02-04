@@ -1,26 +1,75 @@
-// script.js
+const questions = [
+    { 
+        text: "Hiii Honeyy!!! 💕", 
+        answers: ["Hiii !!!!"] 
+    },
+    { 
+        text: "I’m glad you took the time off your day to open this website :DDD", 
+        answers: ["Of course !!!"] 
+    },
+    { 
+        text: "As you know, there’s a specific day coming up!", 
+        answers: ["Mhmm !!!"] 
+    },
+    { 
+        text: "And you, being the one that I love most, I just want to ask you something very important!", 
+        answers: ["What is it :ooo"] 
+    },
+    { 
+        text: "Will you Be My Valentine? 💖", 
+        answers: ["Yes 😍", "No 😔"], 
+        special: true // This question has a Yes/No effect
+    },
+    { 
+        text: "YIPPEEEEE!!! 🎉 I made a special gift for you!", 
+        answers: ["🎁 Open Your Gift! 🎁"], 
+        link: "YOUR_LINK_HERE" 
+    }
+];
 
 let currentQuestion = 0;
 let noButtonPressCount = 0;
 
-function nextQuestion() {
-    let questions = document.querySelectorAll('.question');
-    if (currentQuestion < questions.length - 1) {
-        questions[currentQuestion].style.display = "none";
-        currentQuestion++;
-        questions[currentQuestion].style.display = "block";
-    }
+function nextQuestion(index) {
+    if (index >= questions.length) return;
+
+    currentQuestion = index;
+    const questionContainer = document.getElementById("question-container");
+    const questionText = document.getElementById("question-text");
+    const answerButtons = document.getElementById("answer-buttons");
+
+    // Update the question
+    questionText.innerText = questions[index].text;
+
+    // Clear old buttons
+    answerButtons.innerHTML = "";
+
+    // Add new buttons
+    questions[index].answers.forEach((answer) => {
+        let button = document.createElement("button");
+        button.classList.add("btn");
+        button.innerText = answer;
+        if (questions[index].special) {
+            button.onclick = answer === "Yes 😍" ? () => selectOption("yes") : () => selectOption("no");
+        } else if (questions[index].link) {
+            button.onclick = () => window.location.href = questions[index].link;
+        } else {
+            button.onclick = () => nextQuestion(index + 1);
+        }
+        answerButtons.appendChild(button);
+    });
 }
 
 function selectOption(option) {
-    let questionDiv = document.getElementById('question');
-    let yesButton = document.getElementById('yes-button');
-    let noButton = document.getElementById('no-button');
+    let questionDiv = document.getElementById('question-container');
+    let yesButton = document.querySelector(".btn:first-child");
+    let noButton = document.querySelector(".btn:last-child");
 
     if (option === 'yes') {
         flashRainbowColors(() => {
             questionDiv.style.display = 'none';
             displayCatHeart();
+            nextQuestion(5);
         });
     } else if (option === 'no') {
         noButtonPressCount++;
@@ -64,8 +113,7 @@ function displayCatHeart() {
     catHeartImage.alt = 'Cat Heart';
     catHeartImage.onload = () => {
         imageContainer.appendChild(catHeartImage);
-        document.getElementById('options').style.display = 'none';
-        nextQuestion();
+        document.getElementById('question-container').style.display = 'none';
     };
 }
 
