@@ -1,18 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💖</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Optional: Add external CSS -->
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h2>Home Page</h2>
+
+    <div id="quiz">
+        <div class="question">
+            <p>Hiii Honeyy!!! 💕</p>
+            <button class="btn" onclick="nextQuestion()">Hiii !!!!</button>
         </div>
-        <div class="content">
-            <a href="login.php">Login</a>
-            <a href="register.php">Register</a>
+        
+        <div class="question">
+            <p>I’m glad you took the time off your day to open this website :DDD</p>
+            <button class="btn" onclick="nextQuestion()">Of course !!!</button>
+        </div>
+
+        <div class="question">
+            <p>As you know, there’s a specific day coming up!</p>
+            <button class="btn" onclick="nextQuestion()">Mhmm !!!</button>
+        </div>
+
+        <div class="question">
+            <p>And you, being the one that I love most, I just want to ask you something very important!</p>
+            <button class="btn" onclick="nextQuestion()">What is it :ooo</button>
+        </div>
+
+        <div class="question" id="question">
+            <p>Will you Be My Valentine? 💖</p>
+            <div id="options">
+                <button id="yes-button" class="btn" onclick="selectOption('yes')">Yes 😍</button>
+                <button id="no-button" class="btn" onclick="selectOption('no')">No 😔</button>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>YIPPEEEEE!!! 🎉 I made a special gift for you!</p>
+            <a href="YOUR_LINK_HERE" class="btn">🎁 Open Your Gift! 🎁</a>
         </div>
     </div>
+
+    <div id="image-container"></div>
+
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>
