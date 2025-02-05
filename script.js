@@ -147,5 +147,46 @@ function moveButtonToRandomPosition(button) {
     button.style.top = randomY + 'px';
 }
 
+function displayFinalQuestion() {
+    let finalQuestion = questions[5];
+    document.getElementById("question").innerText = finalQuestion.text;
+    let optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = ""; // Clear previous buttons
+
+    finalQuestion.answers.forEach(answer => {
+        let button = document.createElement("button");
+        button.innerText = answer;
+        button.onclick = () => spinIanHeadAndRedirect(finalQuestion.link);
+        optionsContainer.appendChild(button);
+    });
+}
+
+function spinIanHeadAndRedirect(url) {
+    let overlay = document.createElement("div");
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100vw";
+    overlay.style.height = "100vh";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    overlay.style.display = "flex";
+    overlay.style.justifyContent = "center";
+    overlay.style.alignItems = "center";
+    overlay.style.zIndex = "9999";
+
+    let img = document.createElement("img");
+    img.src = "IanHead.png"; // Ensure this file is in the correct directory
+    img.style.width = "50px"; // Start small
+    img.style.height = "50px";
+    img.style.animation = "spin-grow-shrink 1.5s ease-in-out forwards";
+
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 1500);
+}
+
 // Initialize the first question
 nextQuestion(0);
