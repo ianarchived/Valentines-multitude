@@ -23,16 +23,6 @@ function nextQuestion(index) {
     questionElement.innerHTML = "";
     optionsContainer.innerHTML = "";
 
-    // Check if the current question is the "Will you be my valentine?" question
-    if (questions[index].text === "Will you Be My Valentine? 💖") {
-        let catImage = new Image();
-        catImage.src = 'cat.gif';
-        catImage.alt = 'Cat';
-        catImage.style.display = 'block';
-        catImage.style.margin = '0 auto 20px';
-        questionElement.appendChild(catImage);
-    }
-
     // Set the question text
     questionElement.innerHTML += questions[index].text;
 
@@ -42,7 +32,8 @@ function nextQuestion(index) {
         button.innerText = answer;
 
         // Special handling for the Valentine question
-                   button.onclick = answer === "Yes 😍" ? () => selectOption("yes") : () => selectOption("no");
+        if (questions[index].special) {
+            button.onclick = answer === "Yes 😍" ? () => selectOption("yes") : () => selectOption("no");
         } 
         // Redirect to a special gift if it's the final question
         else if (questions[index].link) {
@@ -177,4 +168,3 @@ function spinIanHeadAndRedirect(url) {
 
 // Initialize the first question
 nextQuestion(0);
-
