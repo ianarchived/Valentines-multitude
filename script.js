@@ -42,8 +42,7 @@ function nextQuestion(index) {
         button.innerText = answer;
 
         // Special handling for the Valentine question
-        if (questions[index].special) {
-            button.onclick = answer === "Yes 😍" ? () => selectOption("yes") : () => selectOption("no");
+                   button.onclick = answer === "Yes 😍" ? () => selectOption("yes") : () => selectOption("no");
         } 
         // Redirect to a special gift if it's the final question
         else if (questions[index].link) {
@@ -131,7 +130,7 @@ function displayFinalQuestion() {
     finalQuestion.answers.forEach(answer => {
         let button = document.createElement("button");
         button.innerText = answer;
-        button.onclick = () => window.location.href = finalQuestion.link;
+        button.onclick = () => spinIanHeadAndRedirect(finalQuestion.link);
         optionsContainer.appendChild(button);
     });
 }
@@ -147,20 +146,7 @@ function moveButtonToRandomPosition(button) {
     button.style.top = randomY + 'px';
 }
 
-function displayFinalQuestion() {
-    let finalQuestion = questions[5];
-    document.getElementById("question").innerText = finalQuestion.text;
-    let optionsContainer = document.getElementById("options");
-    optionsContainer.innerHTML = ""; // Clear previous buttons
-
-    finalQuestion.answers.forEach(answer => {
-        let button = document.createElement("button");
-        button.innerText = answer;
-        button.onclick = () => spinIanHeadAndRedirect(finalQuestion.link);
-        optionsContainer.appendChild(button);
-    });
-}
-
+// Function to spin the IanHead logo and redirect
 function spinIanHeadAndRedirect(url) {
     let overlay = document.createElement("div");
     overlay.style.position = "fixed";
@@ -178,7 +164,7 @@ function spinIanHeadAndRedirect(url) {
     img.src = "IanHead.png"; // Ensure the file exists
     img.style.width = "100px"; // Initial size
     img.style.height = "100px";
-    img.style.animation = "spin-grow-shrink 1.5s ease-in-out forwards";
+    img.style.animation = "spin-grow-shrink 1.5s ease-in-out forwards"; // Apply the spinning animation
 
     overlay.appendChild(img);
     document.body.appendChild(overlay);
@@ -186,8 +172,9 @@ function spinIanHeadAndRedirect(url) {
     // Redirect after animation
     setTimeout(() => {
         window.location.href = url;
-    }, 1500);
+    }, 1500); // 1.5 seconds delay for animation
 }
 
 // Initialize the first question
 nextQuestion(0);
+
