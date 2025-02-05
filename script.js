@@ -26,6 +26,11 @@ function nextQuestion(index) {
     // Set the question text
     questionElement.innerHTML += questions[index].text;
 
+    // Display cat.gif if the current question is "Will you Be My Valentine?"
+    if (index === 4) {  // Question 5 (index 4)
+        displayCatGif(); // Display the cat gif when "Will you Be My Valentine?" is shown
+    }
+
     // Create buttons for the answers
     questions[index].answers.forEach(answer => {
         let button = document.createElement("button");
@@ -57,8 +62,7 @@ function selectOption(option) {
     if (option === 'yes') {
         flashRainbowColors(() => {
             questionDiv.style.display = 'none';
-            displayCatHeart();
-            nextQuestion(5);
+            nextQuestion(5);  // Go to the next question after saying "Yes"
         });
     } else if (option === 'no') {
         noButtonPressCount++;
@@ -97,17 +101,19 @@ function flashRainbowColors(callback) {
     }, 2000);
 }
 
-// Display a cute cat-heart gif when "Yes" is selected
-function displayCatHeart() {
-    document.getElementById('image-container').innerHTML = '';
+// Display the cat gif when the "Will you Be My Valentine?" question is shown
+function displayCatGif() {
+    document.getElementById('image-container').innerHTML = '';  // Clear any existing content in the image-container
     let imageContainer = document.getElementById('image-container');
-    let catHeartImage = new Image();
-    catHeartImage.src = 'cat-heart.gif'; 
-    catHeartImage.alt = 'Cat Heart';
-    catHeartImage.onload = () => {
-        imageContainer.appendChild(catHeartImage);
-        document.getElementById('question-container').style.display = 'block';
-        displayFinalQuestion();
+    let catGifImage = new Image();
+    catGifImage.src = 'cat.gif';  // Path to your cat.gif
+    catGifImage.alt = 'Cute Cat';
+    catGifImage.style.display = 'block';  // Ensure it's displayed correctly
+    catGifImage.style.margin = '0 auto 20px';  // Center the image
+
+    // Append the cat gif image once it has loaded
+    catGifImage.onload = () => {
+        imageContainer.appendChild(catGifImage);
     };
 }
 
