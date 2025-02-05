@@ -10,6 +10,7 @@ const questions = [
 
 let currentQuestion = 0;
 let noButtonPressCount = 0;
+let catGifDisplayed = false; // Track if the cat gif is displayed
 
 function nextQuestion(index) {
     if (index >= questions.length) return; // Stop if we run out of questions
@@ -26,9 +27,9 @@ function nextQuestion(index) {
     // Set the question text
     questionElement.innerHTML += questions[index].text;
 
-    // Display cat.gif if the current question is "Will you Be My Valentine?"
-    if (index === 4) {  // Question 5 (index 4)
-        displayCatGif(); // Display the cat gif when "Will you Be My Valentine?" is shown
+    // Display cat.gif only for the "Will you Be My Valentine?" question (index 4)
+    if (index === 4 && !catGifDisplayed) {
+        displayCatGif(); // Display cat gif when this question is shown
     }
 
     // Create buttons for the answers
@@ -62,7 +63,8 @@ function selectOption(option) {
     if (option === 'yes') {
         flashRainbowColors(() => {
             questionDiv.style.display = 'none';
-            nextQuestion(5);  // Go to the next question after saying "Yes"
+            displayCatHeart();
+            nextQuestion(5);  // Proceed to next question after "Yes"
         });
     } else if (option === 'no') {
         noButtonPressCount++;
@@ -101,20 +103,28 @@ function flashRainbowColors(callback) {
     }, 2000);
 }
 
-// Display the cat gif when the "Will you Be My Valentine?" question is shown
+// Display a cute cat-heart gif when "Yes" is selected
+function displayCatHeart() {
+    document.getElementById('image-container').innerHTML = '';
+    let imageContainer = document.getElementById('image-container');
+    let catHeartImage = new Image();
+    catHeartImage.src = 'cat-heart.gif'; 
+    catHeartImage.alt = 'Cat Heart';
+    catHeartImage.onload = () => {
+        imageContainer.appendChild(catHeartImage);
+        document.getElementById('question-container').style.display = 'block';
+        displayFinalQuestion();
+    };
+}
+
+// Display cat.gif during the "Will you Be My Valentine?" question
 function displayCatGif() {
-    document.getElementById('image-container').innerHTML = '';  // Clear any existing content in the image-container
+    catGifDisplayed = true; // Set flag to true so it doesn't get shown again
     let imageContainer = document.getElementById('image-container');
     let catGifImage = new Image();
-    catGifImage.src = 'cat.gif';  // Path to your cat.gif
-    catGifImage.alt = 'Cute Cat';
-    catGifImage.style.display = 'block';  // Ensure it's displayed correctly
-    catGifImage.style.margin = '0 auto 20px';  // Center the image
-
-    // Append the cat gif image once it has loaded
-    catGifImage.onload = () => {
-        imageContainer.appendChild(catGifImage);
-    };
+    catGifImage.src = 'cat.gif'; // The cat gif file name
+    catGifImage.alt = 'Cat Gif';
+    imageContainer.appendChild(catGifImage);
 }
 
 // Display the final question with the gift link
