@@ -121,6 +121,31 @@ function displayCatHeart() {
     };
 }
 
+function startIanHeadTransition(destination) {
+    let ianHeadContainer = document.getElementById("ianhead-container");
+    let ianHeadLogo = document.getElementById("ianhead-logo");
+
+    // Show the IanHead logo
+    ianHeadContainer.style.display = "block";
+
+    // Apply animation
+    ianHeadLogo.style.animation = "spinTransition 1.5s ease-in-out forwards";
+
+    // Redirect after animation completes
+    setTimeout(() => {
+        window.location.href = destination;
+    }, 1500); // Match animation duration
+}
+
+// Modify the last question to trigger this effect
+document.addEventListener("DOMContentLoaded", () => {
+    let giftButton = document.querySelector("#options button"); // Get the "Open Your Gift" button
+    if (giftButton) {
+        giftButton.onclick = () => startIanHeadTransition("YOUR_LINK_HERE");
+    }
+});
+
+
 // Display the final question with the gift link
 function displayFinalQuestion() {
     let finalQuestion = questions[5];
