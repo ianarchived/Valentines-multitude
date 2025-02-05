@@ -175,14 +175,15 @@ function spinIanHeadAndRedirect(url) {
     overlay.style.zIndex = "9999";
 
     let img = document.createElement("img");
-    img.src = "IanHead.png"; // Ensure this file is in the correct directory
-    img.style.width = "50px"; // Start small
-    img.style.height = "50px";
+    img.src = "IanHead.png"; // Ensure the file exists
+    img.style.width = "100px"; // Initial size
+    img.style.height = "100px";
     img.style.animation = "spin-grow-shrink 1.5s ease-in-out forwards";
 
     overlay.appendChild(img);
     document.body.appendChild(overlay);
 
+    // Redirect after animation
     setTimeout(() => {
         window.location.href = url;
     }, 1500);
