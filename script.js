@@ -97,6 +97,15 @@ function flashRainbowColors(callback) {
     }, 2000);
 }
 
+if (questions[index].text === "Will you Be My Valentine? 💖") {
+    let catImage = new Image();
+    catImage.src = 'cat.gif';  // Make sure this path is correct
+    catImage.alt = 'Cat';
+    catImage.style.display = 'block';
+    catImage.style.margin = '0 auto 20px';
+    questionElement.appendChild(catImage);
+}
+
 // Display a cute cat-heart gif when "Yes" is selected
 function displayCatHeart() {
     document.getElementById('image-container').innerHTML = '';
