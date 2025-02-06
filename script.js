@@ -103,18 +103,62 @@ function flashRainbowColors(callback) {
     }, 2000);
 }
 
-// Display a cute cat-heart gif when "Yes" is selected
+// Display a cute cat-heart gif when "Yes" is selected, with flowers on both sides
 function displayCatHeart() {
-    document.getElementById('image-container').innerHTML = '';
+    document.getElementById('image-container').innerHTML = ''; // Clear previous images
+
     let imageContainer = document.getElementById('image-container');
+    
+    // Create a wrapper div for better alignment
+    let wrapperDiv = document.createElement("div");
+    wrapperDiv.style.display = "flex";
+    wrapperDiv.style.alignItems = "center";
+    wrapperDiv.style.justifyContent = "center";
+    wrapperDiv.style.gap = "10px"; // Small gap between images
+    
+    // Function to create 3 flowers in a column
+    function createFlowerColumn() {
+        let flowerColumn = document.createElement("div");
+        flowerColumn.style.display = "flex";
+        flowerColumn.style.flexDirection = "column";
+        flowerColumn.style.alignItems = "center";
+        flowerColumn.style.gap = "5px"; // Adjust spacing between flowers
+
+        for (let i = 0; i < 3; i++) {
+            let flowerGif = new Image();
+            flowerGif.src = "flowers.gif"; 
+            flowerGif.alt = "Flower";
+            flowerGif.style.width = "60px"; // Adjust size as needed
+            flowerGif.style.height = "auto";
+            flowerColumn.appendChild(flowerGif);
+        }
+        return flowerColumn;
+    }
+
+    // Create left flower column
+    let leftFlowers = createFlowerColumn();
+    
+    // Create cat-heart gif
     let catHeartImage = new Image();
-    catHeartImage.src = 'cat-heart.gif'; 
-    catHeartImage.alt = 'Cat Heart';
-    catHeartImage.onload = () => {
-        imageContainer.appendChild(catHeartImage);
-        document.getElementById('question-container').style.display = 'block';
-        displayFinalQuestion();
-    };
+    catHeartImage.src = "cat-heart.gif"; 
+    catHeartImage.alt = "Cat Heart";
+    catHeartImage.style.width = "150px"; // Adjust as needed
+    catHeartImage.style.height = "auto";
+
+    // Create right flower column
+    let rightFlowers = createFlowerColumn();
+    
+    // Append elements in order: flowers - cat-heart - flowers
+    wrapperDiv.appendChild(leftFlowers);
+    wrapperDiv.appendChild(catHeartImage);
+    wrapperDiv.appendChild(rightFlowers);
+
+    // Append wrapper to image-container
+    imageContainer.appendChild(wrapperDiv);
+
+    // Ensure the final question is displayed
+    document.getElementById('question-container').style.display = 'block';
+    displayFinalQuestion();
 }
 
 // Display cat.gif during the "Will you Be My Valentine?" question
