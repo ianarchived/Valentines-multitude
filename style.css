@@ -55,7 +55,7 @@ button:hover {
 
 #ianhead-logo {
     width: 50px; /* Start small */
-    height: auto;
+    height: 67px;
     animation: none;
 }
 
@@ -66,7 +66,7 @@ button:hover {
         opacity: 1;
     }
     50% {
-        transform: scale(5) rotate(360deg);
+        transform: scale(7) rotate(360deg);
         opacity: 1;
     }
     100% {
