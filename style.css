@@ -22,6 +22,11 @@ body {
     font-size: 52px;
 }
 
+#question-container.final-message {
+    font-size: 14px; /* Adjust as needed */
+    text-align: center; /* Keeps it balanced with the GIFs */
+}
+
 #options {
     margin-top: 20px;
 }
