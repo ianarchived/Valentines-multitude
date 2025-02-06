@@ -177,9 +177,6 @@ function displayFinalQuestion() {
     document.getElementById("question").innerText = finalQuestion.text;
     let optionsContainer = document.getElementById("options");
     optionsContainer.innerHTML = ""; // Clear previous buttons
-
-    document.getElementById("question-container").classList.add("final-message");
-
     finalQuestion.answers.forEach(answer => {
         let button = document.createElement("button");
         button.innerText = answer;
