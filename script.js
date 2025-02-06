@@ -213,20 +213,23 @@ function spinIanHeadAndRedirect(url) {
     overlay.style.zIndex = "9999";
 
     let img = document.createElement("img");
-    img.src = "IanHead.png"; // Ensure the file exists
-    img.style.width = "100px"; // Initial size
+    img.src = "IanHead.png";
+    img.style.width = "100px"; // Start small
     img.style.height = "100px";
-    img.style.animation = "spin-grow-shrink 1.5s ease-in-out forwards"; // Apply the spinning animation
+    img.style.animation = "spin-grow-shrink 1.5s ease-in-out forwards"; // Apply animation
 
     overlay.appendChild(img);
     document.body.appendChild(overlay);
 
+    // Show the IanHead logo container
+    let ianHeadContainer = document.getElementById("ianhead-container");
+    ianHeadContainer.style.opacity = "1"; // Make it visible
+
     // Redirect after animation
     setTimeout(() => {
         window.location.href = url;
-    }, 1500); // 1.5 seconds delay for animation
+    }, 1500);
 }
-
 
 // Initialize the first question
 nextQuestion(0);
