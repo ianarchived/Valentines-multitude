@@ -177,7 +177,7 @@ function displayFinalQuestion() {
     document.getElementById("question").innerText = finalQuestion.text;
     let optionsContainer = document.getElementById("options");
     optionsContainer.innerHTML = ""; // Clear previous buttons
-
+    document.getElementById("question-container").classList.add("final-message");
     finalQuestion.answers.forEach(answer => {
         let button = document.createElement("button");
         button.innerText = answer;
@@ -225,6 +225,7 @@ function spinIanHeadAndRedirect(url) {
         window.location.href = url;
     }, 1500); // 1.5 seconds delay for animation
 }
+
 
 // Initialize the first question
 nextQuestion(0);
